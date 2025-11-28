@@ -23,14 +23,17 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     setShowSplash(false)
   }
 
-  // No mostrar BottomNav en páginas de autenticación
-  const showBottomNav = !pathname.startsWith('/login') && !pathname.startsWith('/registro')
+  // No mostrar BottomNav en páginas de autenticación o splash
+  const showBottomNav = !pathname.startsWith('/login') &&
+                        !pathname.startsWith('/registro') &&
+                        !pathname.startsWith('/splash') &&
+                        pathname !== '/'
 
   return (
     <>
       {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
       {children}
-      {showBottomNav && <BottomNav />}
+      {showBottomNav && !showSplash && <BottomNav />}
     </>
   )
 }

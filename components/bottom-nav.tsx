@@ -11,28 +11,28 @@ export default function BottomNav() {
     {
       name: 'Inicio',
       icon: Home,
-      path: '/'
+      path: '/dashboard'
     },
     {
       name: 'Buscar',
       icon: Search,
-      path: '/buscar'
+      path: '/dashboard/buscar'
     },
     {
       name: 'Crear',
       icon: PlusCircle,
-      path: '/crear',
+      path: '/dashboard/crear',
       special: true
     },
     {
       name: 'Chats',
       icon: MessageCircle,
-      path: '/chats'
+      path: '/dashboard/chats'
     },
     {
       name: 'Perfil',
       icon: User,
-      path: '/perfil'
+      path: '/dashboard/perfil'
     }
   ]
 

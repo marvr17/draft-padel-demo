@@ -38,7 +38,7 @@ export default function SplashPage() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-draft-dark flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-draft-dark flex flex-col items-center justify-center p-4 overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-draft-green/10 rounded-full blur-3xl animate-pulse"></div>
