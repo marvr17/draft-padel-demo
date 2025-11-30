@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { formatDistanceToNow } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { notifyNuevoJugador, notifyPartidoCompleto, requestNotificationPermission } from '@/lib/notifications'
 
 interface Message {
   id: string
@@ -115,9 +116,13 @@ export default function DetallePartidoPage({ params }: { params: { id: string } 
     setNuevoMensaje('')
   }
 
-  const handleUnirse = () => {
+  const handleUnirse = async () => {
     if (jugadoresActuales < partidoDemo.jugadoresMáximos) {
-      setJugadoresActuales(prev => prev + 1)
+      // Pedir permiso de notificaciones en la primera interacción
+      await requestNotificationPermission()
+
+      const nuevosJugadores = jugadoresActuales + 1
+      setJugadoresActuales(nuevosJugadores)
 
       // Agregar mensaje automático de unión
       const mensajeUnion: Message = {
@@ -131,6 +136,18 @@ export default function DetallePartidoPage({ params }: { params: { id: string } 
       }
 
       setMensajes([...mensajes, mensajeUnion])
+
+      // Notificar al organizador (simulado después de 2 segundos)
+      setTimeout(() => {
+        notifyNuevoJugador(user.nombre, params.id)
+      }, 2000)
+
+      // Si el partido se completa, notificar a todos
+      if (nuevosJugadores === partidoDemo.jugadoresMáximos) {
+        setTimeout(() => {
+          notifyPartidoCompleto(partidoDemo.descripcion, params.id)
+        }, 3000)
+      }
     }
   }
 

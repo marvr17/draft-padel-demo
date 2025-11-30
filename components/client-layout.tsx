@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import SplashScreen from './splash-screen'
 import BottomNav from './bottom-nav'
+import { initNotifications } from '@/lib/notifications'
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
@@ -16,6 +17,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     if (!hasShownSplash && pathname === '/') {
       setShowSplash(true)
     }
+
+    // Inicializar notificaciones cuando la app carga
+    initNotifications().catch(console.error)
   }, [pathname])
 
   const handleSplashFinish = () => {
