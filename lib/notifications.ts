@@ -85,16 +85,16 @@ export async function showNotification(options: NotificationOptions) {
         url: options.url || '/',
         type: options.type,
       },
-      tag: options.type, // Evita duplicados del mismo tipo
-      requireInteraction: options.type === 'partido_completo', // Requiere acción del usuario para partidos completos
-    });
+      tag: options.type,
+      requireInteraction: options.type === 'partido_completo',
+    } as NotificationOptions & { vibrate?: number[] });
   } else {
     // Fallback a Notification API nativa
     new Notification(options.title, {
       body: options.body,
       icon: notificationOptions.icon,
       vibrate: options.vibrate !== false ? [200, 100, 200] : undefined,
-    });
+    } as NotificationOptions & { vibrate?: number[] });
   }
 }
 
