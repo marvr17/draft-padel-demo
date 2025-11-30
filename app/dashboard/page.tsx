@@ -26,6 +26,8 @@ interface Partido {
 }
 
 export default function FeedPage() {
+  const router = useRouter()
+
   // Mock data - reemplazar con fetch de Supabase
   const [partidos] = useState<Partido[]>([
     {
@@ -214,30 +216,23 @@ export default function FeedPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             <span className="text-sm">Club Padel GDL</span>
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Search bar */}
-        <div className="px-4 pb-3">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Buscar por nivel, fecha, hora..."
-              className="w-full bg-draft-gray text-white placeholder-gray-500 rounded-xl px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-draft-green"
-            />
-            <svg className="w-5 h-5 text-gray-500 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
           </div>
         </div>
       </header>
 
-      {/* Feed de partidos */}
+      {/* Feed de partidos destacados */}
       <div className="px-4 py-6 space-y-4">
-        {partidos.map((partido) => (
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-white font-bold text-lg">Partidos Destacados</h2>
+          <button
+            onClick={() => router.push('/dashboard/buscar')}
+            className="text-draft-green text-sm font-semibold hover:underline"
+          >
+            Ver todos →
+          </button>
+        </div>
+
+        {partidos.slice(0, 5).map((partido) => (
           <PartidoCard key={partido.id} partido={partido} />
         ))}
       </div>
