@@ -76,7 +76,7 @@ export async function showNotification(options: NotificationOptions) {
   // Si hay Service Worker, usar su API
   if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
     const registration = await navigator.serviceWorker.ready;
-    await registration.showNotification(options.title, {
+    const notifOptions: any = {
       body: options.body,
       icon: notificationOptions.icon,
       badge: notificationOptions.badge,
@@ -87,14 +87,16 @@ export async function showNotification(options: NotificationOptions) {
       },
       tag: options.type,
       requireInteraction: options.type === 'partido_completo',
-    } as NotificationOptions & { vibrate?: number[] });
+    };
+    await registration.showNotification(options.title, notifOptions);
   } else {
     // Fallback a Notification API nativa
-    new Notification(options.title, {
+    const notifOptions: any = {
       body: options.body,
       icon: notificationOptions.icon,
       vibrate: options.vibrate !== false ? [200, 100, 200] : undefined,
-    } as NotificationOptions & { vibrate?: number[] });
+    };
+    new Notification(options.title, notifOptions);
   }
 }
 
