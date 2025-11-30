@@ -182,9 +182,13 @@ export default function FeedPage() {
         <div className="px-4 py-4">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              {/* Logo placeholder - reemplazar con imagen real */}
-              <div className="w-10 h-10 bg-draft-green rounded-lg flex items-center justify-center">
-                <span className="text-draft-black font-bold text-xl">D</span>
+              {/* Logo */}
+              <div className="w-10 h-10 bg-draft-green rounded-lg overflow-hidden">
+                <img
+                  src="/logo.jpg"
+                  alt="Draft Padel"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h1 className="text-xl font-bold text-white">Draft Padel</h1>
             </div>
