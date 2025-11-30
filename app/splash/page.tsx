@@ -49,9 +49,18 @@ export default function SplashPage() {
       <div className="relative z-10 text-center">
         {/* Logo animado */}
         <div className="mb-8 animate-bounce-slow">
-          <div className="w-32 h-32 mx-auto bg-gradient-to-br from-draft-green to-green-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-draft-green/50 relative">
+          <div className="w-32 h-32 mx-auto bg-gradient-to-br from-draft-green to-green-600 rounded-3xl flex items-center justify-center shadow-2xl shadow-draft-green/50 relative overflow-hidden">
             <div className="absolute inset-0 bg-draft-green rounded-3xl animate-ping opacity-20"></div>
-            <span className="text-draft-black font-bold text-6xl relative z-10">D</span>
+            <img
+              src="/logo.jpg"
+              alt="Draft Padel Logo"
+              className="w-full h-full object-cover rounded-3xl relative z-10"
+              onError={(e) => {
+                // Fallback si no existe el logo
+                e.currentTarget.style.display = 'none'
+                e.currentTarget.parentElement!.innerHTML += '<span class="text-draft-black font-bold text-6xl relative z-10">D</span>'
+              }}
+            />
           </div>
         </div>
 
